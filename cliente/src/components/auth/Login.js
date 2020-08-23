@@ -31,7 +31,9 @@ const Login = () => {
     return (  
         <div className="form-usuario">
             <div className="contenedor-form sombra-dark">
+                <center><img src="icon.png" width="12%"/></center>
                 <h1 className="orange">INICIAR SESION</h1>
+                
                 <form
                     onSubmit={onSubmit}
                 >
@@ -69,9 +71,12 @@ const Login = () => {
                     </div>
                 </form>
                 
-                <Link className="enlace-cuenta"  to={'/nuevaCuenta'}>
-                    Obtener Cuenta
-                </Link>
+                <div>
+                    <Link className="btn btn-secundario btn-block"  to={'/nuevaCuenta'}>
+                        <center>OBTENER CUENTA</center> 
+                    </Link>
+                </div>
+               
             </div>
         </div>
     );

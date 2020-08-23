@@ -64,6 +64,13 @@ a {
 .btn:hover {
   cursor: pointer;
 }
+.btn-eliminar{
+  background-color: red;
+  color: var(--blanco);
+  font-size: 2rem;
+}
+
+
 .btn-primario {
   background-color: orange;
   color: var(--blanco);
@@ -73,7 +80,8 @@ a {
   background: yellowgreen;
 }
 .btn-secundario {
-  background-color: var(--gris1);
+  background-color: var(--gris3);
+  color:white;
 }
 .btn-block {
   display: block;
@@ -137,7 +145,7 @@ aside  {
 .app-header {
   display: flex;
   justify-content: space-between;
-  background-color: var(--gris2);
+  background-color: orange;
   padding: 4rem;
 }
 .nombre-usuario {
@@ -250,11 +258,11 @@ aside  {
 }
 .completo,
 .correcto {
-  background-color: rgba(154, 252, 154, .3);
+  background-color: rgb(154, 252, 154);
   color: var(--gris3);
 }
 .incompleto{
-  background-color: rgba(255, 178, 178, .4);
+  background-color: rgb(255, 178, 178);
   color: var(--gris3);
 }
 .error {
@@ -286,7 +294,7 @@ aside  {
 }
 
 .form-usuario {
-    background-color: greenyellow;
+    background-color: yellowgreen;
     height: 100vh;
     min-height: 800px;
     display: flex;
@@ -332,4 +340,10 @@ aside  {
 /*colores */
 .orange{
   color: orange;
+}
+
+
+.title{
+  margin: 0%;
+  margin-bottom: 10px;
 }

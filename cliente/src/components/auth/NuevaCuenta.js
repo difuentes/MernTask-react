@@ -13,8 +13,6 @@ const NuevaCuenta = () => {
     })
     //extraer el usuario
     const {nombre,email,password,confirmar} = usuario;
-
-
     //onchange
     const onchange= e =>{
         guardarUsuario({
@@ -101,10 +99,12 @@ const NuevaCuenta = () => {
 
                     </div>
                 </form>
-
-                <Link className="enlace-cuenta"  to={'/'}>
-                    Volver a Iniciar Sesion
+                <div>
+                <Link className="enlace-cuenta btn btn-secundario btn-block"  to={'/'}>
+                    <center> VOLVER A INICIO DE SESION</center>
                 </Link>
+                </div>
+               
             </div>
         </div>
     );
