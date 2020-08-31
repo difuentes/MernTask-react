@@ -1,8 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {Link} from 'react-router-dom'
+import AlertaContext from '../../context/alertas/alertasContex'
 
 
 const NuevaCuenta = () => {
+
+    //extraer los valores del context alerta
+    const alertaContext =  useContext(AlertaContext);
+    const {alerta,mostrarAlerta} = alertaContext;
 
     //State Para Iniciar sesion
     const [usuario, guardarUsuario] = useState({
@@ -22,19 +27,34 @@ const NuevaCuenta = () => {
     }
 
     //cuando el usuario quiere iniciar Sesion
-    const onSubmit =e =>{
+    const onSubmit = e =>{
         e.preventDefault(); 
         //validar campos vacios
 
+        if(nombre.trim() === ''||email.trim() === ''||password.trim() === ''||confirmar.trim() === ''){
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
+            return;
+        }
+
         //pass minimo 8 caracteres
+        if(password.length < 8  ){
+            mostrarAlerta('alerta debe ser de largo 8','alerta-error');
+            return;
+        }
 
         //los 2 password son iguales 
+        if(confirmar !== password  ){
+            mostrarAlerta('Contraseñas no son iguales ','alerta-error');
+            return;
+        }
 
         //pasarlo al action
     }
 
     return (  
         <div className="form-usuario">
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>): null }
+
             <div className="contenedor-form sombra-dark">
                 <h1 className="orange">OBTENER UNA CUENTA</h1>
                 <form
