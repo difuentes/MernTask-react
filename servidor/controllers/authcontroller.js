@@ -43,8 +43,6 @@ exports.autenticarUsuario = async(req,res)=>{
             res.json({token})
         })
 
-
-
      } catch (error) {
          console.log(error);
      }
