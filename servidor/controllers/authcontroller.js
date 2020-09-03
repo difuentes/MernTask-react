@@ -4,21 +4,18 @@ const { validationResult } = require('express-validator');
 const JWT = require('jsonwebtoken');
 
 
+//login de usuarios (return "Token")
 exports.autenticarUsuario = async(req,res)=>{
 
-     //revisar si hay errores
-     const errores = validationResult(req);
-     if( !errores.isEmpty()){    
-         return res.status(400).json({errores: errores.array()})    
-     }
-
-     //extraer el email y pass
-     const  {email,password} = req.body;
-
+     
      try {
+         //extraer el email y pass
+            const  {email,password} = req.body;
+            console.log(req.body);
         //revisar que sea usuario registrado por email
         let usuario = await Usuario.findOne({email});
-        //revisar so usuario existe
+        console.log(usuario)
+        //revisar si usuario existe
         if(!usuario){
             return res.status(400).json({msg:'El usuario no existe'})
         }
@@ -34,7 +31,6 @@ exports.autenticarUsuario = async(req,res)=>{
                 id:usuario.id
                      }
         };
-
         //fimar el JWT
         JWT.sign(payload,process.env.SECRETA,{
         expiresIn: 3600 //1 hora
@@ -47,3 +43,14 @@ exports.autenticarUsuario = async(req,res)=>{
          console.log(error);
      }
 }
+
+//retorna datos del usuario logeado 
+exports.usuarioAutenticado = async(req,res)=>{
+    try {
+        const usuario = await Usuario.findById(req.usuario.id).select('-password');
+        res.json({usuario});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:"hubo un error"})
+    }
+} 

@@ -3,11 +3,17 @@ const express = require('express');
 //conexion con mongoDB
 const conectarDB = require('./config/db.js');
 
+//import cors
+const cors = require('cors');
+
 //crear el servidor
 const app = express();
 
 //conectar a MongoDB
 conectarDB();
+
+//habilitar cors
+app.use(cors());
 
 //habilitar express.json
 app.use(express.json({extended:true}));

@@ -1,13 +1,31 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import AlertaContext from '../../context/alertas/alertasContex'
+import AuthContext from '../../context/autenticacion/authContex'
 
 
-const NuevaCuenta = () => {
+const NuevaCuenta = (props) => {
 
     //extraer los valores del context alerta
     const alertaContext =  useContext(AlertaContext);
     const {alerta,mostrarAlerta} = alertaContext;
+
+    //extraer los valores del context Auth
+    const authContext =  useContext(AuthContext);
+    const {mensaje,autenticado,registrarUsuario } = authContext;
+
+
+    //en caso de que usuario se haya autenticado o registrado o error
+     useEffect(()=>{
+         if(autenticado){
+            console.log("entra a autenticado")
+            props.history.push('/proyectos')
+         }
+         if(mensaje){
+            mostrarAlerta(mensaje.msg,mensaje.categoria);
+         }
+
+     },[mensaje,autenticado,props.history])
 
     //State Para Iniciar sesion
     const [usuario, guardarUsuario] = useState({
@@ -25,30 +43,26 @@ const NuevaCuenta = () => {
             [e.target.name] : e.target.value
         })
     }
-
     //cuando el usuario quiere iniciar Sesion
-    const onSubmit = e =>{
+    const onSubmit = e => { 
         e.preventDefault(); 
         //validar campos vacios
-
         if(nombre.trim() === ''||email.trim() === ''||password.trim() === ''||confirmar.trim() === ''){
             mostrarAlerta('Todos los campos son obligatorios','alerta-error');
             return;
         }
-
         //pass minimo 8 caracteres
         if(password.length < 8  ){
             mostrarAlerta('alerta debe ser de largo 8','alerta-error');
             return;
         }
-
         //los 2 password son iguales 
         if(confirmar !== password  ){
             mostrarAlerta('Contraseñas no son iguales ','alerta-error');
             return;
         }
-
         //pasarlo al action
+        registrarUsuario({nombre,email,password});
     }
 
     return (  
