@@ -1,26 +1,26 @@
-const moongose = require('mongoose');
+const mongoose = require('mongoose');
 
-const UsuarioSchema = moongose.Schema({
-    nombre:{
-     type: String,
-     requerired:true,
-     trim:true
-    },
-    email:{
+const UsuariosSchema = mongoose.Schema({
+    nombre: {
         type: String,
-        requerired:true,
-        trim:true,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true, 
         unique: true
     },
-    password:{
+    password: {
         type: String,
-        requerired:true,
-        trim:true
+        required: true,
+        trim: true
     },
-    registro:{
+    registro: {
         type: Date,
-        default : Date.now()
+        default: Date.now()
     }
-})
+});
 
-module.exports = moongose.model('Usuario',UsuarioSchema)
+module.exports = mongoose.model('Usuario', UsuariosSchema);

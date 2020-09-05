@@ -18,13 +18,13 @@ const NuevaCuenta = (props) => {
     //en caso de que usuario se haya autenticado o registrado o error
      useEffect(()=>{
          if(autenticado){
-            console.log("entra a autenticado")
+            //console.log("entra a autenticado")
             props.history.push('/proyectos')
          }
          if(mensaje){
             mostrarAlerta(mensaje.msg,mensaje.categoria);
          }
-
+         // eslint-disable-next-line
      },[mensaje,autenticado,props.history])
 
     //State Para Iniciar sesion

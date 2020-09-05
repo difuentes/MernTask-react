@@ -1,37 +1,36 @@
-//router para Autg de usuarios
 const express = require('express');
 const router = express.Router();
-const tareasController = require('../controllers/tareasControllers');
+const tareaController = require('../controllers/tareaController');
 const auth = require('../middleware/auth');
-const {check} = require('express-validator');
+const { check } = require('express-validator');
 
-
-//api/tareas
-//crear una tarea 
-
-router.post('/',
+// crear una tarea
+// api/tareas
+router.post('/', 
     auth,
     [
-        check('nombre','El nombre del proyecto es obligatorio').not().isEmpty(),
-        check('proyecto','El proyecto es obligatorio').not().isEmpty()
+        check('nombre', 'El Nombre es obligatorio').not().isEmpty(),
+        check('proyecto', 'El Proyecto es obligatorio').not().isEmpty()
     ],
-    tareasController.crearTarea
-    
-)
+    tareaController.crearTarea
+);
 
+// Obtener las tareas por proyecto
 router.get('/',
     auth,
-    tareasController.ObtenerTareas
-)
+    tareaController.obtenerTareas
+);
 
-router.put('/:id',
+// Actualizar tarea
+router.put('/:id', 
     auth,
-    tareasController.actualizarTareas
-)
+    tareaController.actualizarTarea
+);
 
-router.delete('/:id',
+// Eliminar tarea
+router.delete('/:id', 
     auth,
-    tareasController.eliminarTarea
-)
+    tareaController.eliminarTarea
+);
 
 module.exports = router;

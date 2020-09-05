@@ -24,7 +24,7 @@ const AuthState = props => {
 
      //extraer los valores del context alerta
      const alertaContext =  useContext(AlertaContext);
-     const {alerta,mostrarAlerta} = alertaContext;
+     const {mostrarAlerta} = alertaContext;
 
     const initialState = {
         token: localStorage.getItem('token'),
@@ -44,7 +44,7 @@ const AuthState = props => {
         try {
             //consumir API
             const respuesta = await clienteAxios.post('/api/usuarios' , datos);
-            console.log(respuesta.data);
+            //console.log(respuesta.data);
 
             dispatch({
                 type:REGRISTRO_EXITOSO,
@@ -55,7 +55,7 @@ const AuthState = props => {
             usuarioAutenticado()
 
         } catch (error) {
-            console.log(error);
+            //console.log(error);
 
             const alerta ={
                 msg: error.response.data.msg,
@@ -76,19 +76,19 @@ const AuthState = props => {
         if(token){
             //TODO : Funcion para enviar el token por headers
             tokenAuth(token);
-            console.log("entra al token"+token );
+            //console.log("entra al token"+token );
         }
 
         try {
             const respuesta = await clienteAxios.get('/api/auth');
-            console.log(respuesta.data);
+            //console.log(respuesta.data);
             dispatch({
                 type:OBTENER_USUARIO,
                 payload:respuesta.data.usuario
             });
 
         } catch (error) {
-            console.log(error);
+           // console.log(error);
             dispatch({
                 type:LOGIN_ERROR
             })
@@ -100,7 +100,7 @@ const AuthState = props => {
         try {
             // console.log( datos);
             const respuesta = await clienteAxios.post('/api/auth', datos);
-            console.log(respuesta)
+           // console.log(respuesta)
             dispatch({
                 type:LOGIN_EXITOSO,
                 payload: respuesta.data
@@ -116,7 +116,7 @@ const AuthState = props => {
                 msg: error.response.data.msg,
                 categoria:'alerta-error'
             }
-            console.log(alerta);
+            //console.log(alerta);
 
             setTimeout(()=>{
                 mostrarAlerta(alerta.msg,alerta.categoria);

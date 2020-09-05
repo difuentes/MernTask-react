@@ -19,13 +19,11 @@ import AuthToke from './config/token';
 const token = localStorage.getItem('token');
 
 if(token){
+  
   AuthToke(token);
 }
 
 function App() {
-
-
-
   return (
     <ProyectoState>
       <TareaState>

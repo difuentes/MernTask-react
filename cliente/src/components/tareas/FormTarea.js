@@ -56,12 +56,10 @@ const  FormularioTareas = () => {
             return
         }
         //si es edicion o si es una nueva tarea
-
         if(tareaSeleccionada === null){
 
             //agregar nueva tarea al state
-            tarea.id = proyectoActual.id;
-            tarea.estado = false;
+            tarea.proyecto = proyectoActual._id;
             agregartarea(tarea);
         }
         else{
@@ -72,7 +70,7 @@ const  FormularioTareas = () => {
         }
         //pasar la validacion
         //obtener y filtrar las tareas del proyecto
-        console.log(proyectoActual.id)
+        //console.log(proyectoActual.id)
         obtenerTareas(proyectoActual.id);
         //reiniciar form 
         guardarTarea({

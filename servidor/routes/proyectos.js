@@ -1,37 +1,39 @@
-//router para Autg de usuarios
 const express = require('express');
 const router = express.Router();
 const proyectoController = require('../controllers/proyectoController');
 const auth = require('../middleware/auth');
-const {check} = require('express-validator');
+const { check } = require('express-validator');
 
-//crear un proyecto 
-//api/proyecto
-router.post('/',
+
+// Crea proyectos
+// api/proyectos
+router.post('/', 
     auth,
     [
-        check('nombre','El nombre del proyecyo es obligatorio').not().isEmpty()
+        check('nombre', 'El nombre del proyecto es obligatoio').not().isEmpty()
     ],
     proyectoController.crearProyecto
-    
+);
+
+// Obtener todos los proyectos
+router.get('/', 
+    auth,
+    proyectoController.obtenerProyectos
 )
 
-router.get('/',
+// Actualizar proyecto via ID
+router.put('/:id', 
     auth,
-    proyectoController.crearProyecto
-    
-)
-
-router.put('/:id',
-    auth,
+    [
+        check('nombre', 'El nombre del proyecto es obligatoio').not().isEmpty()
+    ],
     proyectoController.actualizarProyecto
-    
-)
+);
 
-router.delete('/:id',
+// Eliminar un Proyecto
+router.delete('/:id', 
     auth,
     proyectoController.eliminarProyecto
-    
-)
+);
 
 module.exports = router;

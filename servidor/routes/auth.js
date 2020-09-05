@@ -1,23 +1,19 @@
-//router para Autg de usuarios
+// Rutas para autenticar usuarios
 const express = require('express');
 const router = express.Router();
-const {check} = require('express-validator');
-const authController = require('../controllers/authcontroller');
-const auth = require('../middleware/auth')
+const { check } = require('express-validator');
+const authController = require('../controllers/authController');
+const auth = require('../middleware/auth');
 
-//inicio de sesion
-//api/auth
-
-router.post('/',
+// Iniciar sesión
+// api/auth
+router.post('/', 
     authController.autenticarUsuario
-    
-)
+);
 
+// Obtiene el usuario autenticado
 router.get('/',
-   auth, 
-   authController.usuarioAutenticado
-    
-)
-
-
+    auth,
+    authController.usuarioAutenticado
+);
 module.exports = router;

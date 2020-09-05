@@ -24,7 +24,7 @@ const Login = (props) => {
     useEffect(()=>{
         
         if(autenticado){
-            console.log("entra a autenticado")
+           // console.log("entra a autenticado")
             props.history.push('/proyectos')
         }
         
@@ -32,7 +32,7 @@ const Login = (props) => {
             console.log("entra en mensaje");
          mostrarAlerta(mensaje.msg,mensaje.categoria);
         }
-
+        // eslint-disable-next-line
     },[mensaje,autenticado,props.history])
 
     //extraer el usuario

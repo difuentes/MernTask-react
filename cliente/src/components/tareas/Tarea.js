@@ -11,17 +11,17 @@ const Tarea = ({tarea}) => {
 
     //extraer tarea de state 
     const TareaContex = useContext(tareaContext);
-    const {eliminarTareaId,obtenerTareas,cambiarEstadoTarea,guardarTareaActual} = TareaContex;
+    const {eliminarTareaId,obtenerTareas,actualizarTarea,guardarTareaActual} = TareaContex;
 
     //extraerElProyecto
     const [proyectoActual]= proyecto
 
-
     //funcion para eliminar tarea
     const tareaEliminar = id =>{
-        eliminarTareaId(id);
+        eliminarTareaId(id,proyectoActual._id );
         obtenerTareas(proyectoActual.id);
     }
+
     //funcion cambiar estado de tarea
     const cambiarEstado = tarea =>{
         if(tarea.estado){
@@ -30,8 +30,9 @@ const Tarea = ({tarea}) => {
         else{
             tarea.estado= true;
         }
-        cambiarEstadoTarea(tarea)
+        actualizarTarea(tarea)
     }
+
     //agregar tarea acual para editar 
     const seleccionarTarea = tarea => {
         guardarTareaActual(tarea);
@@ -60,7 +61,7 @@ const Tarea = ({tarea}) => {
                 <button
                  type="button"
                  className="btn btn-secundario"
-                 onClick={() => tareaEliminar(tarea.proyectoId)}
+                 onClick={() => tareaEliminar(tarea._id)}
                 >
                     Eliminar
                 </button>
